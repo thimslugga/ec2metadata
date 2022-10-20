@@ -128,10 +128,9 @@ class EC2Metadata:
         )
         try:
             token = urllib.request.urlopen(request).read().decode()
+            self.request_header = {'X-aws-ec2-metadata-token': token}
         except urllib.error.URLError:
             self.request_header = {}
-
-        self.request_header = {'X-aws-ec2-metadata-token': token}
         
     def _set_meta_options(self):
         """Set the metadata options for the current API on this object."""
